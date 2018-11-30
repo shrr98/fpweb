@@ -1,0 +1,23 @@
+.signupForm {
+	margin:75px;
+}
+
+.form-group {
+	margin:10px;
+}
+
+.form-control {
+	background-color: #e2fdfa;
+	color: #108888;
+	width: 300px;
+}
+
+::placeholder{
+	color: #5b8383
+}
+
+.alert_danger{
+	color: #ff4646;
+	font-size: 8pt;
+	margin-bottom:10px;
+}
