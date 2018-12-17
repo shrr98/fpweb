@@ -8,6 +8,8 @@ use Phalcon\Mvc\Dispatcher\Exception as Exception;
 
 use Phalcon\Mvc\Model\Manager as ModelsManager;
 
+use Phalcon\Http\Response\Cookies;
+
 $di->set(
 	'voltService',
 	function ($view, $di) {
@@ -127,7 +129,7 @@ $di->set(
 
 $di->set( 
 	"cookies", function () { 
-	   $cookies = new Phalcon\Http\Response\Cookies();  
+	   $cookies = new Cookies();  
 	   $cookies->useEncryption(false);
 	   return $cookies; 
 	} 

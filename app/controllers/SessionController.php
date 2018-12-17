@@ -10,29 +10,33 @@ use App\Forms\LoginForm;
 class SessionController extends Controller
 {
     private $message = "";
+
     public function createAction()
     {
-        $this->view->message=$this->message;
-        $user_rem = null;
-        $remCookies = $this->cookies->get('remember');
-        $remCookies = $remCookies->getValue();
-// var_dump($_COOKIE); die();
-        // if($remCookies){
-        //     $user_rem = [
-        //         'username' => $remCookies['username'],
-        //         'password' => $remCookies['password']
-        //     ];
-        // }
-        if(isset($_COOKIE['remember'])){
-            $user_rem = [
-                'username' => $_COOKIE['remember']['username'],
-                'password' => $_COOKIE['remember']['password']
-            ];
-        }
+        if($this->session->has('auth'))
+            $this->response->redirect('profile');
 
-        // var_dump($user_rem); die();
-        $this->view->form = new LoginForm($user_rem);
+        $form = new LoginForm();
+    
+        // Check if the cookie has previously set
+        if ($this->cookies->has('remember-username') && $this->cookies->has('remember-password')) {
+            // Get the cookie's values
+            $username = $this->cookies->get('remember-username')->getValue();
+            $password = $this->cookies->get('remember-password')->getValue();
+            
+            // set value of form
+            $attr = $form->get('username')->getAttributes();
+            $attr['value'] = $username;
+            $form->get('username')->setAttributes($attr);
+
+            $attr = $form->get('password')->getAttributes();
+            $attr['value'] = $password;
+            $form->get('password')->setAttributes($attr);
+        }
+////////////////////////////////////////////////////////////////
         
+        $this->view->message=$this->message;
+        $this->view->form = $form;
     }
 
     public function storeAction()
@@ -57,22 +61,24 @@ class SessionController extends Controller
                         'remember' => $remember
         			]
                 );
-                
-                if($remember==1){
+                /////////////////////////////////////////
+                if($remember=="1"){
                     $this->cookies->set(
-                        "remember",
-                        [
-                            'username' => $username,
-                            'role' => $user->role,
-                            'password' => $password,
-                        ],
+                        'remember-username',
+                        $username,
                         time() + 15 * 86400
                     );
-                    $this->cookies->send();
-                    setcookie("remember", ['username'=> $username, 'password'=>$password], (86400 * 15), '/');
-                    
-                    
+    
+                    $this->cookies->set(
+                        'remember-password',
+                        $password,
+                        time() + 15 * 86400
+                    );
                 }
+                
+                ////////////////////////////////////////////
+               
+               
         		(new Response())->redirect()->send();
             }
             else{

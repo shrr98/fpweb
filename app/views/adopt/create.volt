@@ -13,7 +13,7 @@
     {% endif %}
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top:200px;">
   {% if countcat >0 %}
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner row w-100 mx-auto 0" role="listbox" style=" width:100%; height:50vw">
@@ -25,7 +25,7 @@
           {% endif %}        
             <div class="card h-75">
               <div class="card-body">
-                <img src={{c.photo}} style="height:30%;display: block; margin-left: auto; margin-right: auto;">
+                <img src={{c.photo}} style="height:200px;display: block; margin-left: auto; margin-right: auto;">
                 <h4 class="card-title">{{c.name_cat}}</h4>
                 {{ c.type_cat ~' ( '~c.age~' ) '~' - '~c.gender }}<br/>
                 {{ 'Suffers: '~c.penyakit }} <br/>                

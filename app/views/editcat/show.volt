@@ -30,7 +30,7 @@
                 {% endif %}
               <div class="card-body">
                 
-                <img src={{c.photo}} style="height:30%;display: block; margin-left: auto; margin-right: auto;">
+                <img src={{c.photo}} style="height:200px;display: block; margin-left: auto; margin-right: auto;">
                 <h4 class="card-title">{{c.name_cat}}</h4>
                 {{ c.type_cat ~' ( '~c.age~' ) '~' - '~c.gender }}<br/>
                 {{ 'Suffers: '~c.penyakit }} <br/>                

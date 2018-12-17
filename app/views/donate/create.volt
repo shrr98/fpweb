@@ -32,7 +32,8 @@
 		</div>
 
 		<div class="col-md-6">
-			<p>Login instead</p>
+			<p>Instead</p>
+			<a type='button' class='btn btn-info' href='care'><small>Donate to specific cat</small></a>
 		</div>
 
 		<div class="donate"></div>
