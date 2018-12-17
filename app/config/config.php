@@ -9,9 +9,9 @@ return new Config([
 	'host' => '127.0.0.1',
 	'username' => 'root',
 	'password' => '',
-	'dbname' => 'its_catty_peri'
+	'dbname' => 'its_catty_peri_1'
 	],
 	'url' => [
-	'baseUrl' => 'http://localhost/fpweb/'
+	'baseUrl' => 'http://localhost/fpweb2/'
 	]
 ]);

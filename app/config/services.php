@@ -6,6 +6,8 @@ use Phalcon\Events\Manager as EventsManager;
 use Phalcon\Events\Event as Event;
 use Phalcon\Mvc\Dispatcher\Exception as Exception;
 
+use Phalcon\Mvc\Model\Manager as ModelsManager;
+
 $di->set(
 	'voltService',
 	function ($view, $di) {
@@ -50,6 +52,15 @@ $di->set(
 	}
 );
 
+
+$di->set(
+    "modelsManager",
+    function() {
+        return new ModelsManager();
+    }
+);
+
+
 $di->set(
 	'url',
 	function () use ($config, $di) {
@@ -78,7 +89,8 @@ $di->set(
  */
 $di->set('flash', function () {
     return new Flash([
-        'error' => 'alert_danger',
+		'errorf' => 'alert_danger',
+        'error' => 'alert alert-danger',
         'success' => 'alert alert-success',
         'notice' => 'alert alert-info',
         'warning' => 'alert alert-warning'
@@ -88,19 +100,36 @@ $di->set('flash', function () {
 $di->set(
 	'eventManager', function() {
 		$eventsManager = new EventsManager();
+
 		$eventsManager->attach(
-			'dispatch::beforeException',
-			function(Event $event, $dispatcher, Exception $exception) {
-				if($exception instanceof Exception){
-					$dispatcher->forward([
-						'controller' => 'index',
-						'action' => 'show404',
-						'params' => [$exception->getMessage()],
-					]);
+			"dispatch:beforeException",
+			function($event, $dispatcher, $exception)
+			{
+				switch ($exception->getCode()) {
+					case PhDispatcher::EXCEPTION_HANDLER_NOT_FOUND:
+					case PhDispatcher::EXCEPTION_ACTION_NOT_FOUND:
+						$dispatcher->forward(
+							array(
+								'controller' => 'home',
+								'action'     => 'show404',
+							)
+						);
+						return false;
 				}
-				return false;
 			}
 		);
-		return $eventsManager;
+
+		$dispatcher = new PhDispatcher();
+    	$dispatcher->setEventsManager($eventsManager);
+    	return $dispatcher;
 	}
 );
+
+$di->set( 
+	"cookies", function () { 
+	   $cookies = new Phalcon\Http\Response\Cookies();  
+	   $cookies->useEncryption(false);
+	   return $cookies; 
+	} 
+ ); 
+ 

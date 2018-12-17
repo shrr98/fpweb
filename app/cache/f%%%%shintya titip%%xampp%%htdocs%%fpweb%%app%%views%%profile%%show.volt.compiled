@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="<?= $this->url->get('css/bootstrap.css') ?>" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:400,700" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Courgette|EB+Garamond|Charmonman" rel="stylesheet"> 
+
+<link href="<?= $this->url->get('css/style.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style1.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style2.css') ?>" rel="stylesheet">
+
+
+<script src="<?= $this->url->get('js/jquery.js') ?>"></script>
+<script src="<?= $this->url->get('js/script.js') ?>"></script>
+
+<script src="<?= $this->url->get('js/bootstrap.min.js') ?>"></script>
+
+<script src="<?= $this->url->get('js/jquery.steps.js') ?>"></script>
+
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:400,700" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Courgette|EB+Garamond|Charmonman" rel="stylesheet"> 
+
+<link href="<?= $this->url->get('css/bootstrap.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style1.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style2.css') ?>" rel="stylesheet">
+
+		<title>Profile - My Webpage</title>
+	</head>
+	<body>
+		<nav>
+			<div class="logo"><a href="<?= $this->url->get('') ?>"><img src="img/logo_pweb3.png" alt="logo"></a></div>
+			<div class="nav-cont-left">
+				<ul>
+					<li><a href="<?= $this->url->get('') ?>">Home</a></li>
+					<li>Learn
+						<ul>
+							<li><a href="<?= $this->url->get('tipsntrick') ?>">Tips and Tricks</a></li>
+							<li><a href="<?= $this->url->get('care') ?>">Cat Care</a></li>
+							<li><a href="<?= $this->url->get('adopt') ?>">Adopt</a></li>
+						</ul>
+					</li>
+					<li><a href="<?= $this->url->get('report') ?>">Find A Cat ?</a></li>
+					<li><a href="<?= $this->url->get('donate') ?>">Donate</a></li>
+					<li><a href="<?= $this->url->get('about') ?>">About</a></li>
+				<ul>
+			</div>
+
+			<div class="nav-cont-right">
+				<ul>
+				<?php if ($this->session->has('auth')) { ?> 
+					<li><a href="<?= $this->url->get('profile') ?>"><?= $this->session->get('auth')['username'] ?></a></li>
+					<li><a href="<?= $this->url->get('logout') ?>">Logout</a></li>
+
+				<?php } else { ?>
+					<li><a href="<?= $this->url->get('login') ?>">Login</a></li>
+					<li><a href="<?= $this->url->get('register') ?>">Signup</a></li>
+
+				<?php } ?>
+		</nav>
+
+		
+<div class='notif-blok'>
+    <?php if (($messages['warning'] != '')) { ?>
+        <?= $this->flash->outputMessage('notice', $messages['warning']) ?>
+    <?php } ?>
+    <?php if (($messages['error'] != '')) { ?>
+        <?= $this->flash->error($messages['error']) ?>
+    <?php } ?>
+    <?php if (($messages['success'] != '')) { ?>
+        <?= $this->flash->success($messages['success']) ?>
+    <?php } ?>
+</div>
+
+<div class='profile-box'>
+    <h1>YOUR PROFILE</h1>
+    <div class='container'>
+        <div>
+            <a href='data:image/png;base64,<?= $user->photo ?><?= '\'/download=' ?> <?= $this->session->get('auth')['username'] ?> <?= '.png' ?>>
+                <img width=300px src=data:image/png;base64,<?= $user->photo ?>>
+            </a>
+
+            <img src="img/edit_icon.png" type='button' id='edit_photo' data-toggle='modal' data-target='#myModal' style="position:sticky;">
+
+        </div>
+        <div class="modal" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Upload Profile Picture</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form id='form-photo' action='save_photo' method='post' enctype="multipart/form-data">
+                            <?= $upload->render('photo') ?>
+                            <?php if (($messages['photo'] != '')) { ?>
+                                <?= $this->flash->outputMessage('errorf', $messages['photo']) ?>
+                            <?php } ?>
+
+                            <?= $upload->render('Save') ?>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id='info-name' class='info' style="display:inline-block">
+        <h3><b><?= $user->name ?></h3>
+            <img src="img/edit_icon.png" type='button' id='edit_name' class='edit-icon'>
+    </div>
+    <form id='form-name' class='profile-form' action='save_name' method='POST'>
+        <?= $profile->render('name') ?>
+        <?php if (($messages['name'] != '')) { ?>
+            <?= $this->flash->outputMessage('errorf', $messages['name']) ?>
+        <?php } ?>
+        
+        <button type='button' id='close-name' class='btn btn-danger'>
+            Cancel
+        </button>
+        <?= $profile->render('Save') ?>
+    </form>
+
+    <div class='info'>
+        <h4>Account Info</h4>
+        <img src="img/edit_icon.png" type='button' id='edit_account' class='edit-icon'>
+    </div>
+    <div id='info-account' class='info'>
+        <table>
+            <tr>
+                <td>Username:</td>
+                <td><?= '@' . $user->username ?></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><?= $user->email ?></td>
+            </tr>
+            <tr>
+                <td>Phone:</td>
+                <td><?= $user->phone ?></td>
+            </tr>
+        </table>
+    </div>
+
+    <div id='form-account' class='profile-form'>
+        <form action='save_account' method='POST'>
+            <?= $profile->render('username') ?>
+            <?php if (($messages['username'] != '')) { ?>
+                <?= $this->flash->outputMessage('errorf', $messages['username']) ?>
+            <?php } ?>
+
+            <?= $profile->render('email') ?>
+            <?php if (($messages['email'] != '')) { ?>
+                <?= $this->flash->outputMessage('errorf', $messages['email']) ?>
+            <?php } ?>
+
+            <?= $profile->render('phone') ?>
+            <?php if (($messages['phone'] != '')) { ?>
+                <?= $this->flash->outputMessage('errorf', $messages['phone']) ?>
+            <?php } ?>
+            <button type='button' id='close-account' class='btn btn-danger'>
+                Cancel
+            </button>
+            <?= $profile->render('Save') ?>
+
+        </form>
+    </div>
+
+    <div class='info-privacy'>
+        <h4>Privacy</h4>
+        <button type='button' id='edit_privacy' class='btn btn-primary' data-toggle='modal' data-target='#pwModal'>
+            Change Password
+        </button>
+    </div>
+
+    <div id="privacy" class='container'>
+        <div class="modal" id="pwModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Change Password</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form id='form-password' action='save_password' method='post'>
+                            <?= $profile->render('password') ?>
+                            <?php if (($messages['password'] != '')) { ?>
+                                <?= $this->flash->outputMessage('errorf', $messages['password']) ?>
+                            <?php } ?>
+
+                            <?= $profile->render('confirmp') ?>
+                            <?php if (($messages['confirmp'] != '')) { ?>
+                                <?= $this->flash->outputMessage('errorf', $messages['confirmp']) ?>
+                            <?php } ?>
+
+                            <?= $profile->render('Save') ?>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <?php if ($user_notif == null) { ?>
+        <?= $this->flash->notice('There is no notification') ?>
+    <?php } else { ?>
+    <?php foreach ($user_notif as $notif) { ?>
+        <?= $this->flash->notice($notif->msg . '     [' . $notif->date_notif . ']') ?>
+        <a href='see?id_notif=<?= $notif->id_notif ?>'>See Details</a>
+    <?php } ?>
+    <?php } ?>
+</div>
+
+
+
+		<div class="footer">
+			<div class="row">
+				<div class="column-base" style="margin-left:130px;">
+					<p>Learn more</p>
+					<ul><li><a href="<?= $this->url->get('tipsntrick') ?>">Tips and Tricks</a></li>
+						<li><a href="<?= $this->url->get('care') ?>">Cat Care</a></li>
+						<li><a href="<?= $this->url->get('adopt') ?>">Adopt</a></li>
+					</ul>
+				</div>
+				<div class="column-base" style="margin-right:20px;">
+					<p>About</p>
+					<ul><li>The Project</li>
+						<li>The Program</li>
+						<li>The Volunteer</li></ul>
+				</div>
+				<div class="column-base" style="margin-left:20px;">
+					<p>Follow us</p>
+					<ul><li><i class="fa fa-facebook-square"></i> IT's Catty Peri</li>
+						<li><i class="fa fa-twitter"></i> its_cattyperi</li>
+						<li><i class="fa fa-instagram"></i> its.cattyperi</li>
+					</ul>
+				</div>
+				<div class="column-base" style="margin-right:100px;">
+					<p>Contact</p>
+					<ul><li>(0354)687454</li>
+						<li>its_cattyperi@gmail.com</li>
+						<li>its.cattyperi@yahoo.com</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+<script src="<?= $this->url->get('js/jquery.js') ?>"></script>
+<script src="<?= $this->url->get('js/bootstrap.js') ?>"></script>
+<script src="<?= $this->url->get('js/popper.js') ?>"></script>
+<script src="<?= $this->url->get('js/jquery.steps.js') ?>"></script>
+<script src="<?= $this->url->get('js/script.js') ?>"></script>
+		</body>
+</html>

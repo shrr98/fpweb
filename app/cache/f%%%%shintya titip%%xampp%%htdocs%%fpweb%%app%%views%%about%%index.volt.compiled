@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="<?= $this->url->get('css/bootstrap.css') ?>" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:400,700" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Courgette|EB+Garamond|Charmonman" rel="stylesheet"> 
+
+<link href="<?= $this->url->get('css/style.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style1.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style2.css') ?>" rel="stylesheet">
+
+
+<script src="<?= $this->url->get('js/jquery.js') ?>"></script>
+<script src="<?= $this->url->get('js/script.js') ?>"></script>
+
+<script src="<?= $this->url->get('js/bootstrap.min.js') ?>"></script>
+
+<script src="<?= $this->url->get('js/jquery.steps.js') ?>"></script>
+
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:400,700" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Courgette|EB+Garamond|Charmonman" rel="stylesheet"> 
+
+<link href="<?= $this->url->get('css/bootstrap.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style1.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style2.css') ?>" rel="stylesheet">
+
+		<title> Halaman Utama Saya  - My Webpage</title>
+	</head>
+	<body>
+		<nav>
+			<div class="logo"><a href="<?= $this->url->get('') ?>"><img src="img/logo_pweb3.png" alt="logo"></a></div>
+			<div class="nav-cont-left">
+				<ul>
+					<li><a href="<?= $this->url->get('') ?>">Home</a></li>
+					<li>Learn
+						<ul>
+							<li><a href="<?= $this->url->get('tipsntrick') ?>">Tips and Tricks</a></li>
+							<li><a href="<?= $this->url->get('care') ?>">Cat Care</a></li>
+							<li><a href="<?= $this->url->get('adopt') ?>">Adopt</a></li>
+						</ul>
+					</li>
+					<li><a href="<?= $this->url->get('report') ?>">Find A Cat ?</a></li>
+					<li><a href="<?= $this->url->get('donate') ?>">Donate</a></li>
+					<li><a href="<?= $this->url->get('about') ?>">About</a></li>
+				<ul>
+			</div>
+
+			<div class="nav-cont-right">
+				<ul>
+				<?php if ($this->session->has('auth')) { ?> 
+					<li><a href="<?= $this->url->get('profile') ?>"><?= $this->session->get('auth')['username'] ?></a></li>
+					<li><a href="<?= $this->url->get('logout') ?>">Logout</a></li>
+
+				<?php } else { ?>
+					<li><a href="<?= $this->url->get('login') ?>">Login</a></li>
+					<li><a href="<?= $this->url->get('register') ?>">Signup</a></li>
+
+				<?php } ?>
+		</nav>
+
+		
+
+	<div class="home"><img src="img/cat4.jpeg"></div>
+
+	<div class="cattyperi">
+		<img src="img/logo_pweb3.png" alt="logo">
+		<p>IT’s Catty Peri is a non-profit organization for helping feral cat around ITS which have some program to achieve.<br>
+		   The majority of staff from IT’s Catty Peri come from students who work voluntarily to save feral cats, especially those who were in a bad condition.<br>
+		   Our fund come from donation from members,include the user, and partners.  
+		</p>
+	</div>
+
+	<div class="parallax"></div>
+
+	<div id="about">
+		<h2>The Program</h2>
+		<h3>The program of IT's Catty Peri can be called 3-Chain, <b>Collecting, Caring, and Channeling</b>. <br> Here are the detail of the program : </h3>
+
+		<div class="row">
+			<div class="column3">
+				<h1><b>Collecting</b></h1>
+				<p>The "collecting" program means that we receive felar cats which have been reported by user. The cats must be delivered within three days after registration. After that, we look the cat condition. Our staff will seperate between healthy and unhealthy cats and put them in our temporial shelter.</p>
+			</div>
+			<div class="column3">
+				<h1><b>Caring</b></h1>
+				<p>The "caring" program means that we will take care all of the cats in our shelter. Not only provide appropriate nutrition, but also give some affection. Checking their condition daily is necessary. Certainly, unhealthy and injured cats will get intensive treatment.</p>
+			</div>
+			<div class="column3">
+				<h1><b>Channeling</b></h1>
+				<p>The "channeling" program has two meaning. The first, channeling for people who want to adopt cats. The second, channeling for the partners. Channeling for the people who want to adopt cats means we provide them to choose which one cat from all cats in shelter. For partners, we provide them to do good thing by donating and contributing.</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="parallax"></div>
+
+	<div id="about">
+		<h2>Member of Team</h2>
+		<h3>Here are several member of team for developing project "IT's Catty Peri" :</h3>
+
+		<div class="row">
+			<div class="column" style="margin-left:40vh;">
+				<img src="img/cat.jpg">
+				<p>ahgfyuegfaergyufa</p>
+			</div>
+			<div class="column" style="margin-left:40vh;">
+				<img src="img/cat.jpg">
+				<p>cadbcaegrhyuergyf</p>
+			</div>
+		</div>
+	</div>
+
+
+
+		<div class="footer">
+			<div class="row">
+				<div class="column-base" style="margin-left:130px;">
+					<p>Learn more</p>
+					<ul><li><a href="<?= $this->url->get('tipsntrick') ?>">Tips and Tricks</a></li>
+						<li><a href="<?= $this->url->get('care') ?>">Cat Care</a></li>
+						<li><a href="<?= $this->url->get('adopt') ?>">Adopt</a></li>
+					</ul>
+				</div>
+				<div class="column-base" style="margin-right:20px;">
+					<p>About</p>
+					<ul><li>The Project</li>
+						<li>The Program</li>
+						<li>The Volunteer</li></ul>
+				</div>
+				<div class="column-base" style="margin-left:20px;">
+					<p>Follow us</p>
+					<ul><li><i class="fa fa-facebook-square"></i> IT's Catty Peri</li>
+						<li><i class="fa fa-twitter"></i> its_cattyperi</li>
+						<li><i class="fa fa-instagram"></i> its.cattyperi</li>
+					</ul>
+				</div>
+				<div class="column-base" style="margin-right:100px;">
+					<p>Contact</p>
+					<ul><li>(0354)687454</li>
+						<li>its_cattyperi@gmail.com</li>
+						<li>its.cattyperi@yahoo.com</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+<script src="<?= $this->url->get('js/jquery.js') ?>"></script>
+<script src="<?= $this->url->get('js/bootstrap.js') ?>"></script>
+<script src="<?= $this->url->get('js/popper.js') ?>"></script>
+<script src="<?= $this->url->get('js/jquery.steps.js') ?>"></script>
+<script src="<?= $this->url->get('js/script.js') ?>"></script>
+		</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="<?= $this->url->get('css/bootstrap.css') ?>" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:400,700" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Courgette|EB+Garamond|Charmonman" rel="stylesheet"> 
+
+<link href="<?= $this->url->get('css/style.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style1.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style2.css') ?>" rel="stylesheet">
+
+
+<script src="<?= $this->url->get('js/jquery.js') ?>"></script>
+<script src="<?= $this->url->get('js/script.js') ?>"></script>
+
+<script src="<?= $this->url->get('js/bootstrap.min.js') ?>"></script>
+
+<script src="<?= $this->url->get('js/jquery.steps.js') ?>"></script>
+
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:400,700" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Courgette|EB+Garamond|Charmonman" rel="stylesheet"> 
+
+<link href="<?= $this->url->get('css/bootstrap.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style1.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style2.css') ?>" rel="stylesheet">
+
+		<title> Halaman Utama Saya  - My Webpage</title>
+	</head>
+	<body>
+		<nav>
+			<div class="logo"><a href="<?= $this->url->get('') ?>"><img src="img/logo_pweb3.png" alt="logo"></a></div>
+			<div class="nav-cont-left">
+				<ul>
+					<li><a href="<?= $this->url->get('') ?>">Home</a></li>
+					<li>Learn
+						<ul>
+							<li><a href="<?= $this->url->get('tipsntrick') ?>">Tips and Tricks</a></li>
+							<li><a href="<?= $this->url->get('care') ?>">Cat Care</a></li>
+							<li><a href="<?= $this->url->get('adopt') ?>">Adopt</a></li>
+						</ul>
+					</li>
+					<li><a href="<?= $this->url->get('report') ?>">Find A Cat ?</a></li>
+					<li><a href="<?= $this->url->get('donate') ?>">Donate</a></li>
+					<li><a href="<?= $this->url->get('about') ?>">About</a></li>
+				<ul>
+			</div>
+
+			<div class="nav-cont-right">
+				<ul>
+				<?php if ($this->session->has('auth')) { ?> 
+					<li><a href="<?= $this->url->get('profile') ?>"><?= $this->session->get('auth')['username'] ?></a></li>
+					<li><a href="<?= $this->url->get('logout') ?>">Logout</a></li>
+
+				<?php } else { ?>
+					<li><a href="<?= $this->url->get('login') ?>">Login</a></li>
+					<li><a href="<?= $this->url->get('register') ?>">Signup</a></li>
+
+				<?php } ?>
+		</nav>
+
+		
+
+	<div class="home"><img src="img/cat4.jpeg"></div>
+
+	<div class="cattyperi">
+		<img src="img/logo_pweb3.png" alt="logo">
+		<p>You can help several feral cats around ITS by restoring some help. Together, we will save their life, give new home and family, also bring the bright future and happiness .</p>
+	</div>
+
+	<div class="row">
+		<div class="column">
+			<h2>Big population of cats is a concern that need to be solved</h2>
+
+			<p>Controlling the growth of cats in ITS and surrounding is a challenge for us to mantain the sustainable population between living things, especially animal and also the public convinence.  By adopting them, you can rescue and  lift this burden.<br><br>
+			Moreover, looking for appropriate keeper is better than put the cat to the shelter. It will reduce the number of cat rapidly and avoid the overflowing population in animal shelter.</p>
+			<button><span>Read</span></button>
+		</div>
+		<div class="column">
+			<img src="img/cat.jpg">
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="column"><img src="img/cat1.jpg"></div>
+		<div class="column">
+			<h2>Threatened cats should be treated </h2>
+
+			<p>Many cats and kittens around ITS often ignore by people. Sometimes, their life only depend on leftover food and mercy by random person. Because of that, feral cats usually suffer many kind of diseases and injuries . With a charitable donation, you can assist them to get treatment and proper nutrition. <br><br>
+			Different donate choice are provided to give flexibility for determining which cats that become your priority.
+			</p>
+			<button><span>Read</span></button>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="column">
+			<h2>Our temporary shelter resettle for cats </h2>
+
+			<p>Due to crucial condition, a few of cat need intensive guarding. If you find several cats that look like unhealthy in ITS and surrounding, you can leave the cat to us. <br><br>
+			By registering immediately, you will speed up the handling of cats 
+			</p>
+			<button><span>Read</span></button>
+		</div>
+		<div class="column"><img src="img/cat2.jpg"></div>
+	</div>
+
+	<div class="row">
+	<div class="column"><img src="img/cat3.png"></div>
+		<div class="column">
+			<h2>Giving affection after adopting cats</h2>
+
+			<p>On occasion, dealing with cats is complex, especially the new cat. Begin with how to check their daily condition and nutrition and take care of them. With several tips and tricks that will you get, you can do it easily. <br><br>
+			Beside that, you can join and comment with other user for sharing experience.
+			</p>
+			<button><span>Read</span></button>
+		</div>
+	</div>
+
+
+
+		<div class="footer">
+			<div class="row">
+				<div class="column-base" style="margin-left:130px;">
+					<p>Learn more</p>
+					<ul><li><a href="<?= $this->url->get('tipsntrick') ?>">Tips and Tricks</a></li>
+						<li><a href="<?= $this->url->get('care') ?>">Cat Care</a></li>
+						<li><a href="<?= $this->url->get('adopt') ?>">Adopt</a></li>
+					</ul>
+				</div>
+				<div class="column-base" style="margin-right:20px;">
+					<p>About</p>
+					<ul><li>The Project</li>
+						<li>The Program</li>
+						<li>The Volunteer</li></ul>
+				</div>
+				<div class="column-base" style="margin-left:20px;">
+					<p>Follow us</p>
+					<ul><li><i class="fa fa-facebook-square"></i> IT's Catty Peri</li>
+						<li><i class="fa fa-twitter"></i> its_cattyperi</li>
+						<li><i class="fa fa-instagram"></i> its.cattyperi</li>
+					</ul>
+				</div>
+				<div class="column-base" style="margin-right:100px;">
+					<p>Contact</p>
+					<ul><li>(0354)687454</li>
+						<li>its_cattyperi@gmail.com</li>
+						<li>its.cattyperi@yahoo.com</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+<script src="<?= $this->url->get('js/jquery.js') ?>"></script>
+<script src="<?= $this->url->get('js/bootstrap.js') ?>"></script>
+<script src="<?= $this->url->get('js/popper.js') ?>"></script>
+<script src="<?= $this->url->get('js/jquery.steps.js') ?>"></script>
+<script src="<?= $this->url->get('js/script.js') ?>"></script>
+		</body>
+</html>

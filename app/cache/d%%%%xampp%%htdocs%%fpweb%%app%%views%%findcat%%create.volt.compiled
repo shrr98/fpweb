@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="<?= $this->url->get('css/bootstrap.css') ?>" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:400,700" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Courgette|EB+Garamond|Charmonman" rel="stylesheet"> 
+
+<link href="<?= $this->url->get('css/style.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style1.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style2.css') ?>" rel="stylesheet">
+
+
+<script src="<?= $this->url->get('js/jquery.js') ?>"></script>
+<script src="<?= $this->url->get('js/script.js') ?>"></script>
+
+<script src="<?= $this->url->get('js/bootstrap.min.js') ?>"></script>
+
+<script src="<?= $this->url->get('js/jquery.steps.js') ?>"></script>
+
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:400,700" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Courgette|EB+Garamond|Charmonman" rel="stylesheet"> 
+
+<link href="<?= $this->url->get('css/bootstrap.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style1.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style2.css') ?>" rel="stylesheet">
+
+		<title>Find a Cat - My Webpage</title>
+	</head>
+	<body>
+		<nav>
+			<div class="logo"><a href="<?= $this->url->get('') ?>"><img src="img/logo_pweb3.png" alt="logo"></a></div>
+			<div class="nav-cont-left">
+				<ul>
+					<li><a href="<?= $this->url->get('') ?>">Home</a></li>
+					<li>Learn
+						<ul>
+							<li><a href="<?= $this->url->get('tipsntrick') ?>">Tips and Tricks</a></li>
+							<li><a href="<?= $this->url->get('care') ?>">Cat Care</a></li>
+							<li><a href="<?= $this->url->get('adopt') ?>">Adopt</a></li>
+						</ul>
+					</li>
+					<li><a href="<?= $this->url->get('report') ?>">Find A Cat ?</a></li>
+					<li><a href="<?= $this->url->get('donate') ?>">Donate</a></li>
+					<li><a href="<?= $this->url->get('about') ?>">About</a></li>
+				<ul>
+			</div>
+
+			<div class="nav-cont-right">
+				<ul>
+				<?php if ($this->session->has('auth')) { ?> 
+					<li><a href="<?= $this->url->get('profile') ?>"><?= $this->session->get('auth')['username'] ?></a></li>
+					<li><a href="<?= $this->url->get('logout') ?>">Logout</a></li>
+
+				<?php } else { ?>
+					<li><a href="<?= $this->url->get('login') ?>">Login</a></li>
+					<li><a href="<?= $this->url->get('register') ?>">Signup</a></li>
+
+				<?php } ?>
+		</nav>
+
+		
+<div class='notif-blok'>
+    <?php if ($notif != '') { ?>
+    <?= $this->flash->success($notif) ?>
+    <?php } ?>
+    <?php if ($error != '') { ?>
+    <?= $this->flash->error($error) ?>
+    <?php } ?>
+</div>
+
+
+<div class="wrapper">
+    <form action="report" method='POST' enctype='multipart/form-data' id="wizard">
+        <!-- SECTION 1 -->
+        <h4></h4>
+        <section>
+            <div class="inner">
+                <div class="image-holder">
+                    <img src="img/cat9.jpg" alt="">
+                </div>
+                <div class="form-content">
+                    <div class="form-inner">
+                        <div class="form-header">
+                            <h3>Registration for Cat</h3>
+                            <p >~ About Location and Condition ~</p>
+                        </div>
+
+                        <div class="form-row" id="big">
+                            <label for='location' style="display:inline-block;float:left;"5><?= $form->getLabel('location') ?></label>
+                            <?= $this->flash->outputMessage('errorf', '*' . $messages['location']) ?>
+                            <?= $form->render('location') ?>
+                            <?= $this->flash->outputMessage('errorf', $messages['location']) ?>
+                        </div>
+
+                        <div class="form-row" id='big'>
+                            <label for='cat_condition'><?= $form->getLabel('cat_condition') ?></label>
+                            <?= $form->render('cat_condition') ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 -->
+        <h4></h4>
+        <section>
+            <div class="inner">
+                <div class="image-holder">
+                    <img src="img/cat9.jpg" alt="">
+                </div>
+                <div class="form-content">
+                    <div class="form-inner">
+                        <div class="form-header">
+                            <h3>Registration for Cat</h3>
+                            <p >~ About Identity ~</p>
+                        </div>
+                        <div class="form-row">
+                            <label for='cat_name'><?= $form->getLabel('cat_name') ?></label>
+                            <?= $form->render('cat_name') ?>
+                        </div>
+                        <div class="form-row" style="display:block; color:white;">
+                            <label for='gender'>What gender is the cat?</label>
+                            <?= $form->render('Male') ?>
+                            <?= $form->getLabel('Male') ?>
+                            <div style="display:block; color:white;">
+                                <?= $form->render('Female') ?>
+                                <?= $form->getLabel('Female') ?>
+                            </div>
+                            <div style="display:block; color:white;">
+                                <?= $form->render('Uncertain') ?>
+                                <?= $form->getLabel('Uncertain') ?>
+                            </div>
+                            <?= $this->flash->outputMessage('errorf', $messages['gender']) ?>
+                        </div>
+                        <div class="form-row" id='big'>
+                            <label for='cat_photo'><?= $form->getLabel('cat_photo') ?></label>
+                            <?= $form->render('cat_photo') ?>
+                            <?= $this->flash->outputMessage('errorf', $messages['cat_photo']) ?>
+                        </div>
+                        <?= $form->render('Report') ?>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+</div>
+
+
+
+		<div class="footer">
+			<div class="row">
+				<div class="column-base" style="margin-left:130px;">
+					<p>Learn more</p>
+					<ul><li><a href="<?= $this->url->get('tipsntrick') ?>">Tips and Tricks</a></li>
+						<li><a href="<?= $this->url->get('care') ?>">Cat Care</a></li>
+						<li><a href="<?= $this->url->get('adopt') ?>">Adopt</a></li>
+					</ul>
+				</div>
+				<div class="column-base" style="margin-right:20px;">
+					<p>About</p>
+					<ul><li>The Project</li>
+						<li>The Program</li>
+						<li>The Volunteer</li></ul>
+				</div>
+				<div class="column-base" style="margin-left:20px;">
+					<p>Follow us</p>
+					<ul><li><i class="fa fa-facebook-square"></i> IT's Catty Peri</li>
+						<li><i class="fa fa-twitter"></i> its_cattyperi</li>
+						<li><i class="fa fa-instagram"></i> its.cattyperi</li>
+					</ul>
+				</div>
+				<div class="column-base" style="margin-right:100px;">
+					<p>Contact</p>
+					<ul><li>(0354)687454</li>
+						<li>its_cattyperi@gmail.com</li>
+						<li>its.cattyperi@yahoo.com</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+<script src="<?= $this->url->get('js/jquery.js') ?>"></script>
+<script src="<?= $this->url->get('js/bootstrap.js') ?>"></script>
+<script src="<?= $this->url->get('js/popper.js') ?>"></script>
+<script src="<?= $this->url->get('js/jquery.steps.js') ?>"></script>
+<script src="<?= $this->url->get('js/script.js') ?>"></script>
+		</body>
+</html>

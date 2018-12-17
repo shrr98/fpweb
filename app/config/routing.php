@@ -12,18 +12,53 @@ $di->set(
 			new SessionRoutes()
 		);
 
+		$router->mount(
+			new FindcatRoutes()
+		);
+
+		$router->mount(
+			new DonateRoutes()
+		);
+
+		$router->mount(
+			new CareRoutes()
+		);
+
+		$router->mount(
+			new AdoptRoutes()
+		);
+
+		$router->mount(
+			new ProfileRoutes()
+		);
+
+		$router->mount(
+			new TntRoutes()
+		);
+
+		$router->mount(
+			new EditcatRoutes()
+		);
+
 		$router->addGet(
 			'/',
 			[
-				'controller' => 'todo',
+				'controller' => 'home',
+				'action' => 'index'
+			]
+		);
+
+		$router->addGet(
+			'/about',
+			[
+				'controller' => 'about',
 				'action' => 'index'
 			]
 		);
 
 		$router->notFound([
-			'controller' => 'index',
+			'controller' => 'home',
 			'action' => 'show404',
-			'params' => "Maaf, URL tidak ada"
 		]);
 		return $router;
 	}

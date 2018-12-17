@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="<?= $this->url->get('css/bootstrap.css') ?>" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:400,700" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Courgette|EB+Garamond|Charmonman" rel="stylesheet"> 
+
+<link href="<?= $this->url->get('css/style.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style1.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style2.css') ?>" rel="stylesheet">
+
+
+<script src="<?= $this->url->get('js/jquery.js') ?>"></script>
+<script src="<?= $this->url->get('js/script.js') ?>"></script>
+
+<script src="<?= $this->url->get('js/bootstrap.min.js') ?>"></script>
+
+<script src="<?= $this->url->get('js/jquery.steps.js') ?>"></script>
+
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<link href="https://fonts.googleapis.com/css?family=Josefin+Slab:400,700" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Courgette|EB+Garamond|Charmonman" rel="stylesheet"> 
+
+<link href="<?= $this->url->get('css/bootstrap.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style1.css') ?>" rel="stylesheet">
+<link href="<?= $this->url->get('css/style2.css') ?>" rel="stylesheet">
+
+		<title>Cat's List - My Webpage</title>
+	</head>
+	<body>
+		<nav>
+			<div class="logo"><a href="<?= $this->url->get('') ?>"><img src="img/logo_pweb3.png" alt="logo"></a></div>
+			<div class="nav-cont-left">
+				<ul>
+					<li><a href="<?= $this->url->get('') ?>">Home</a></li>
+					<li>Learn
+						<ul>
+							<li><a href="<?= $this->url->get('tipsntrick') ?>">Tips and Tricks</a></li>
+							<li><a href="<?= $this->url->get('care') ?>">Cat Care</a></li>
+							<li><a href="<?= $this->url->get('adopt') ?>">Adopt</a></li>
+						</ul>
+					</li>
+					<li><a href="<?= $this->url->get('report') ?>">Find A Cat ?</a></li>
+					<li><a href="<?= $this->url->get('donate') ?>">Donate</a></li>
+					<li><a href="<?= $this->url->get('about') ?>">About</a></li>
+				<ul>
+			</div>
+
+			<div class="nav-cont-right">
+				<ul>
+				<?php if ($this->session->has('auth')) { ?> 
+					<li><a href="<?= $this->url->get('profile') ?>"><?= $this->session->get('auth')['username'] ?></a></li>
+					<li><a href="<?= $this->url->get('logout') ?>">Logout</a></li>
+
+				<?php } else { ?>
+					<li><a href="<?= $this->url->get('login') ?>">Login</a></li>
+					<li><a href="<?= $this->url->get('register') ?>">Signup</a></li>
+
+				<?php } ?>
+		</nav>
+
+		
+
+<div class='notif-blok'>
+    <?php if ($success != '') { ?>
+    <?= $this->flash->success($success) ?>
+    <?php } ?>
+    <?php if ($error != '') { ?>
+    <?= $this->flash->error($error) ?>
+    <?php } ?>
+</div>
+
+<div class="container-fluid">
+  <?php if ($countcat > 0) { ?>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner row w-100 mx-auto 0" role="listbox" style=" width:100%; height:45vw">
+        <?php $v24641891411iterator = $cats; $v24641891411incr = 0; $v24641891411loop = new stdClass(); $v24641891411loop->self = &$v24641891411loop; $v24641891411loop->length = count($v24641891411iterator); $v24641891411loop->index = 1; $v24641891411loop->index0 = 1; $v24641891411loop->revindex = $v24641891411loop->length; $v24641891411loop->revindex0 = $v24641891411loop->length - 1; ?><?php foreach ($v24641891411iterator as $c) { ?><?php $v24641891411loop->first = ($v24641891411incr == 0); $v24641891411loop->index = $v24641891411incr + 1; $v24641891411loop->index0 = $v24641891411incr; $v24641891411loop->revindex = $v24641891411loop->length - $v24641891411incr; $v24641891411loop->revindex0 = $v24641891411loop->length - ($v24641891411incr + 1); $v24641891411loop->last = ($v24641891411incr == ($v24641891411loop->length - 1)); ?>
+          <?php if (($v24641891411loop->first)) { ?>
+          <div class="carousel-item col-md-4 active">
+          <?php } else { ?>
+          <div class="carousel-item col-md-4">  
+          <?php } ?>        
+            <div class="card h-100">
+              <div class="card-body">
+                <?php if ($c->last_up == null) { ?>
+                    <?= $this->flash->outputMessage('errorf', ' (NEW!)') ?>
+                <?php } ?>
+                <img src=<?= $c->photo ?> height=200px>
+                <h4 class="card-title"><?= $c->name_cat ?></h4>
+                <?= $c->type_cat . ' ( ' . $c->age . ' ) ' . ' - ' . $c->gender ?><br/>
+                <?= 'Suffers: ' . $c->penyakit ?> <br/>                
+                <?= $c->condition_cat ?> <br/>
+                <?= 'founded by: ' . $c->founder . ', ' . $c->date_found . ' in ' . $c->loc_found ?></p>
+
+                <?php if ($c->isadopt == 1) { ?>
+                  <div style="text-align:center;">
+                    <?= $this->flash->success('ADOPTED') ?>
+                  </div>
+                
+                <?php } else { ?>
+                  <form method='GET' action='edit'>
+                    <input type='hidden' name='id_cat' value=<?= $c->id_cat ?> >
+                      <div style='display:inline-block'>
+                        <button type='button' class='ad-btn btn btn-danger' id=<?= $c->id_cat ?> value=<?= $c->id_cat ?> data-toggle='modal' data-target='#delModal'>Delete</button>
+                        <input type='submit' value='Edit' class='btn btn-info'>        
+                      </div>
+                  </form>
+                <?php } ?>
+
+                <p class="card-text">
+                  <small class="text-muted">Last updated <?= $c->last_up ?></small>
+                </p>
+              </div>
+            </div>
+          </div>
+        <?php $v24641891411incr++; } ?>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center mt-4">
+            <a class="btn btn-outline-secondary mx-1 prev" href="javascript:void(0)" title="Previous">
+              <i class="fa fa-lg fa-chevron-left"></i>
+            </a>
+            <a class="btn btn-outline-secondary mx-1 next" href="javascript:void(0)" title="Next">
+              <i class="fa fa-lg fa-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php } else { ?>
+    <h4>No cats found</h4>
+  <?php } ?>  
+</div>
+
+<div id="adoption" class='container'>
+        <div class="modal" id="delModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <form id='form-adopt' action='editcat' method='POST'>
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h4 class="modal-title">Cat's Adoption</h4>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      </div>
+                      <div class="modal-body">
+                              <input type='hidden' value='' name='id_cat' id='id_cat'>
+                              <p>The deletion is done if only the cat has died.</p>
+                              <p>Are you sure want to delete this cat?</p>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                          <input type='submit'  name='delete' value="Delete" class='btn btn-danger'>
+                      </div>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+		<div class="footer">
+			<div class="row">
+				<div class="column-base" style="margin-left:130px;">
+					<p>Learn more</p>
+					<ul><li><a href="<?= $this->url->get('tipsntrick') ?>">Tips and Tricks</a></li>
+						<li><a href="<?= $this->url->get('care') ?>">Cat Care</a></li>
+						<li><a href="<?= $this->url->get('adopt') ?>">Adopt</a></li>
+					</ul>
+				</div>
+				<div class="column-base" style="margin-right:20px;">
+					<p>About</p>
+					<ul><li>The Project</li>
+						<li>The Program</li>
+						<li>The Volunteer</li></ul>
+				</div>
+				<div class="column-base" style="margin-left:20px;">
+					<p>Follow us</p>
+					<ul><li><i class="fa fa-facebook-square"></i> IT's Catty Peri</li>
+						<li><i class="fa fa-twitter"></i> its_cattyperi</li>
+						<li><i class="fa fa-instagram"></i> its.cattyperi</li>
+					</ul>
+				</div>
+				<div class="column-base" style="margin-right:100px;">
+					<p>Contact</p>
+					<ul><li>(0354)687454</li>
+						<li>its_cattyperi@gmail.com</li>
+						<li>its.cattyperi@yahoo.com</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+<script src="<?= $this->url->get('js/jquery.js') ?>"></script>
+<script src="<?= $this->url->get('js/bootstrap.js') ?>"></script>
+<script src="<?= $this->url->get('js/popper.js') ?>"></script>
+<script src="<?= $this->url->get('js/jquery.steps.js') ?>"></script>
+<script src="<?= $this->url->get('js/script.js') ?>"></script>
+		</body>
+</html>
