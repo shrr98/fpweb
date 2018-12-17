@@ -13,6 +13,19 @@ class DonateController extends Controller
     private $error;
     private $messages;
 
+    private function createInvoice($donate){
+        $file = fopen(APP_PATH."\\Invoice_Of_Donation.txt", "w");
+        fwrite($file, "Donation Invoice at IT'S Catty Peri\r\n");
+        $text = "Donator: " . $donate->donator . "\r\n";
+        fwrite($file, $text);
+        $text = "Nominal: " . $donate->nominal . "\r\n";
+        fwrite($file, $text);
+        $text = "Date: " . $donate->date_donation . "\r\n";
+        fwrite($file, $text);
+        fclose($file);
+        return APP_PATH . "\\Invoice_Of_Donation.txt";
+    }
+
     public function initialize(){
         $this->notif = "";
         $this->error = "";
@@ -51,12 +64,17 @@ class DonateController extends Controller
             $donate->date_donation = date ('Y-m-d');
             if($donate->save()){
                 $this->notif = 'Thank you for your donation';
+                $invoice = $this->createInvoice($donate);
+                header("Content-Disposition: attachment; filename=\"" . basename($invoice) . "\"");
+                header("Content-Type: application/text");
+                header("Content-Length: " . filesize($invoice));
+                readfile($invoice);
             }
             
             else $this->error = 'An Error has occured. Please try again.';
         }
-
-        $this->dispatcher->forward(['action'=>'create']);
+        if($this->notif == null)
+            $this->dispatcher->forward(['action'=>'create']);
     }
 
     public function listAction()

@@ -36,7 +36,7 @@ class ProfileController extends Controller
     private function createProfile($us){
         // authorization
         if( !$this->session->has('auth'))
-        $this->dispatcher->forward(['controller'=>'home', 'action' => 'forbidden']);
+        $this->dispatcher->forward(['controller'=>'error', 'action' => 'forbidden']);
 
 
         $user = $us;
@@ -233,7 +233,7 @@ class ProfileController extends Controller
 
     public function seeAction(){
         if(!$this->request->hasQuery('id_notif') || !$this->session->has('auth')){
-            $this->dispatcher->forward(['controller'=>'home', 'action'=>'forbidden']);
+            $this->dispatcher->forward(['controller'=>'error', 'action'=>'forbidden']);
         }
 
         $id_notif = $this->request->getQuery('id_notif');
@@ -241,7 +241,7 @@ class ProfileController extends Controller
 
         // if notif doesn't belong to user, forbidden
         if($this->session->get('auth')['username']!==$user_notif->user)
-            $this->dispatcher->forward(['controller'=>'home', 'action'=>'forbidden']);
+            $this->dispatcher->forward(['controller'=>'error', 'action'=>'forbidden']);
         
         $cat = Cats::findFirst("id_cat = '$user_notif->cat'");
 

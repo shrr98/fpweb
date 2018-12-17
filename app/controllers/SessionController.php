@@ -51,7 +51,6 @@ class SessionController extends Controller
         if($user)
         {
             if($this->security->checkHash($password, $user->password))
-            //if($this->security->check($password, $user->password))
         	{
         		$this->session->set(
         			'auth',
@@ -61,18 +60,19 @@ class SessionController extends Controller
                         'remember' => $remember
         			]
                 );
-                /////////////////////////////////////////
+
+                //////////////// COOKIES /////////////////////////
                 if($remember=="1"){
                     $this->cookies->set(
                         'remember-username',
                         $username,
-                        time() + 15 * 86400
+                        time() + 7 * 86400
                     );
     
                     $this->cookies->set(
                         'remember-password',
                         $password,
-                        time() + 15 * 86400
+                        time() + 7 * 86400
                     );
                 }
                 
@@ -99,12 +99,7 @@ class SessionController extends Controller
 
     public function destroyAction()
     {
-        setcookie("remember", ['username'=> "budi", 'password'=>"$password"], (86400 * 15), '/');
-
-        // $remCookies = $this->cookies->get('remember');
-        // $remCookies->delete();
          $this->session->destroy();
-        //  $this->cookies->send();
      	$this->response->redirect();   
     }
 }

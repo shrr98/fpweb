@@ -57,7 +57,7 @@ $di->set(
 		);
 
 		$router->notFound([
-			'controller' => 'home',
+			'controller' => 'error',
 			'action' => 'show404',
 		]);
 		return $router;

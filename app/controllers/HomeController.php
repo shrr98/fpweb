@@ -9,13 +9,4 @@ class HomeController extends Controller
     {
 
     }
-
-    public function show404Action()
-    {
-    }
-
-    public function forbiddenAction()
-    {
-    }
-
 }

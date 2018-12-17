@@ -32,9 +32,8 @@ class UserController extends Controller
 
     public function createAction()
     {
-        if($this->session->has('auth'))
-            $this->dispatcher->forward(['controller'=>'home', 'action' => 'forbidden']);
-
+        
+        
         $this->view->form = new SignupForm();
         $this->view->message = $this->message;
     }

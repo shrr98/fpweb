@@ -107,16 +107,37 @@ $di->set(
 			"dispatch:beforeException",
 			function($event, $dispatcher, $exception)
 			{
-				switch ($exception->getCode()) {
-					case PhDispatcher::EXCEPTION_HANDLER_NOT_FOUND:
-					case PhDispatcher::EXCEPTION_ACTION_NOT_FOUND:
+				if ($exception instanceof \Phalcon\Mvc\Dispatcher\Exception){
+					switch ($exception->getCode()) {
+						case PhDispatcher::EXCEPTION_HANDLER_NOT_FOUND:
+						case PhDispatcher::EXCEPTION_ACTION_NOT_FOUND:
 						$dispatcher->forward(
 							array(
-								'controller' => 'home',
+								'controller' => 'error',
 								'action'     => 'show404',
 							)
 						);
-						return false;
+						break;
+						
+						default:
+                        $dispatcher->forward(
+							array(
+								'controller' => 'error',
+								'action'     => 'show500',
+							)
+						);
+						break;
+					}
+					
+				}
+				else{
+					$dispatcher->forward(
+						array(
+							'controller' => 'error',
+							'action'     => 'show500',
+						)
+					);
+					
 				}
 			}
 		);

@@ -37,7 +37,7 @@
 <link href="<?= $this->url->get('css/style1.css') ?>" rel="stylesheet">
 <link href="<?= $this->url->get('css/style2.css') ?>" rel="stylesheet">
 
-		<title>Login disini - My Webpage</title>
+		<title> - My Webpage</title>
 	</head>
 	<body>
 		<nav>
@@ -72,40 +72,11 @@
 		</nav>
 
 		
-
-
-<div class='notif-blok'>
-	<?php if (($message != '')) { ?>
-		<?= $this->flash->error($message) ?>
-	<?php } ?>
+<div style="margin:200px;">
+    <h1 class='alert-danger'>Page not found.</h1>
+    <a href='./'>Back to home</a>
 </div>
-
-
-<div class="row-centered">
-	<div class="card"></div>
-	<div class="col-md-6">
-		<?= $form->startForm() ?>
-			<div class="form-group">
-			<?= $form->render('username') ?>
-			</div>
-			<div class="form-group">
-			<?= $form->render('password') ?>
-			</div>
-			<div class="form-group">
-			<div class="form-group">
-			<?= $form->render('Login') ?>
-			</div style="margin-left:50px;">
-			<?= $form->render('remember') ?>
-			<?= $form->getLabel('remember') ?>
-			</div>
-		<?= $form->endForm() ?>
-	</div>
-	<div class="col-md-6">
-	<a href="<?= $this->url->get('register') ?>">Register</a>
-	</div>
-	<img src="img/cat13.png">
-</div>
-
+   
 
 
 		<div class="footer">

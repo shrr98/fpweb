@@ -36,7 +36,7 @@ class CareController extends Controller
 
         $cat;
         $i=0;
-        $cats = Cats::find("penyakit != '' and isadopt is null");
+        $cats = Cats::find("last_up is not null and isadopt is null");
         foreach($cats as $c){
             $cat[$i++] = $c;
         }

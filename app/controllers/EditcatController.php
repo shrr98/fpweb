@@ -48,7 +48,7 @@ class EditcatController extends Controller
 
     public function showAction(){
         if( !$this->session->has('auth') || $this->session->get('auth')['role']!=1)
-            $this->dispatcher->forward(['controller'=>'home', 'action' => 'forbidden']);
+            $this->dispatcher->forward(['controller'=>'error', 'action' => 'forbidden']);
 
         $cat;
         $i=0;

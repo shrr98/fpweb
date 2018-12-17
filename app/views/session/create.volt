@@ -4,6 +4,14 @@
 
 {% block content %}
 
+
+<div class='notif-blok'>
+	{% if(message!='') %}
+		{{ this.flash.error(message) }}
+	{% endif %}
+</div>
+
+
 <div class="row-centered">
 	<div class="card"></div>
 	<div class="col-md-6">
