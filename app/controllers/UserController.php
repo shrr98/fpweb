@@ -32,6 +32,8 @@ class UserController extends Controller
 
     public function createAction()
     {
+        if($this->session->has('auth'))
+        $this->response->redirect('profile');
         
         
         $this->view->form = new SignupForm();

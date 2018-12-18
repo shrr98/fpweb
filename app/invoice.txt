@@ -1,5 +1,0 @@
-Donation Invoice at IT'S Catty Peri
-Donator: budi
-Id cat: 7
-Nominal: 10000
-Date: 2018-12-15
