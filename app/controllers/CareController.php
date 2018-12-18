@@ -14,18 +14,18 @@ class CareController extends Controller
     private $messages = ['nominal'=>''];
 
     private function createInvoice($donate){
-        $file = fopen(BASE_PATH."\\public\\invoice.txt", "w");
-        fwrite($file, "Donation Invoice at IT'S Catty Peri\n");
-        $text = "Donator: " . $donate->donator . "\n";
+        $file = fopen(APP_PATH . "\\Invoice_Of_Donation.txt", "w");
+        fwrite($file, "Donation Invoice at IT'S Catty Peri\r\n");
+        $text = "Donator: " . $donate->donator . "\r\n";
         fwrite($file, $text);
-        $text = "Id cat: " . $donate->id_cat . "\n";
+        $text = "Id cat: " . $donate->id_cat . "\r\n";
         fwrite($file, $text);$text = $text;
-        $text = "Nominal: " . $donate->nominal . "\n";
+        $text = "Nominal: " . $donate->nominal . "\r\n";
         fwrite($file, $text);
-        $text = "Date: " . $donate->date_donation . "\n";
+        $text = "Date: " . $donate->date_donation . "\r\n";
         fwrite($file, $text);
         fclose($file);
-        return BASE_PATH . "\\public\\invoice.txt";
+        return APP_PATH . "\\Invoice_Of_Donation.txt";
     }
 
     public function createAction()
@@ -85,7 +85,7 @@ class CareController extends Controller
                     header("Content-Disposition: attachment; filename=\"" . basename($invoice) . "\"");
                     header("Content-Type: application/force-download");
                     header("Content-Length: " . filesize($invoice));
-                    header("Connection: close");  
+                    readfile($invoice);
                 }
                 else
                     $this->error = 'An error occurs. Please try again.';
@@ -95,7 +95,7 @@ class CareController extends Controller
                 $this->error = 'An error occurs. Please try again.';
             }
         }
-        $this->dispatcher->forward(['action' => 'create']);
+        if($this->success == '') $this->dispatcher->forward(['action' => 'create']);
 
     }
 }
